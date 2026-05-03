@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bxpsij1gs3lmq"]
+
+[ext_resource type="Script" uid="uid://dqrw77o1ia8vg" path="res://scripts/enemy_spawner.gd" id="1_ks1gq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhprm"]
+size = Vector2(180, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcau3"]
+size = Vector2(10, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xdi3"]
+size = Vector2(180, 10)
+
+[node name="MeleeEnemySpawner" type="Area2D" unique_id=141443608]
+script = ExtResource("1_ks1gq")
+
+[node name="Timer" type="Timer" parent="." unique_id=13319100]
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1812396236]
+position = Vector2(0, -45)
+shape = SubResource("RectangleShape2D_mhprm")
+debug_color = Color(0.6392157, 0.33333334, 0.6862745, 0.52156866)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=52840162]
+position = Vector2(84, 0)
+shape = SubResource("RectangleShape2D_bcau3")
+debug_color = Color(0.6392157, 0.33333334, 0.6862745, 0.52156866)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1018543347]
+position = Vector2(0, 45)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_8xdi3")
+debug_color = Color(0.6392157, 0.33333334, 0.6862745, 0.52156866)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=292560225]
+position = Vector2(-84, 0)
+shape = SubResource("RectangleShape2D_bcau3")
+debug_color = Color(0.6392157, 0.33333334, 0.6862745, 0.52156866)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

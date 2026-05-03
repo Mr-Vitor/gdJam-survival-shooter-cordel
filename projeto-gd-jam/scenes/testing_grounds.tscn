@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dwyn4p7sq8k2o"]
+
+[ext_resource type="PackedScene" uid="uid://ba54vgavh75ph" path="res://scenes/player.tscn" id="1_j18ga"]
+[ext_resource type="PackedScene" uid="uid://bxpsij1gs3lmq" path="res://scenes/melee_enemy_spawner.tscn" id="3_xb7la"]
+
+[node name="Testing Grounds" type="Node2D" unique_id=1556592654]
+
+[node name="Player" parent="." unique_id=706497792 instance=ExtResource("1_j18ga")]
+position = Vector2(575, 327)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=63090145]
+
+[node name="MeleeEnemySpawner" parent="Player" unique_id=1712358438 node_paths=PackedStringArray("node_ref") instance=ExtResource("3_xb7la")]
+position = Vector2(-5.364418e-07, 0)
+scale = Vector2(7.2414756, 8.0791855)
+node_ref = NodePath("../..")
