@@ -2,10 +2,10 @@ extends EnemyBase
 
 signal damage_to_player
 
-func _ready():
-	self.health = 12
-	self.dmg = 5
-	self.speed = 70
+func _ready() -> void:
+	self.health = 18
+	self.dmg = 7
+	self.speed = 60
 
 
 func _physics_process(_delta):

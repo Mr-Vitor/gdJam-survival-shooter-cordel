@@ -1,16 +1,32 @@
 [gd_scene format=3 uid="uid://dwyn4p7sq8k2o"]
 
+[ext_resource type="Script" uid="uid://wfcsolry7gtx" path="res://scripts/game_loop.gd" id="1_cuaqe"]
 [ext_resource type="PackedScene" uid="uid://ba54vgavh75ph" path="res://scenes/player.tscn" id="1_j18ga"]
-[ext_resource type="PackedScene" uid="uid://bxpsij1gs3lmq" path="res://scenes/melee_enemy_spawner.tscn" id="3_xb7la"]
+[ext_resource type="Script" uid="uid://cpcgdyc6ocq86" path="res://scripts/level_timer.gd" id="2_xb7la"]
+[ext_resource type="PackedScene" uid="uid://bxpsij1gs3lmq" path="res://scenes/melee_spawner.tscn" id="3_xb7la"]
+[ext_resource type="PackedScene" uid="uid://cjvro2xjye56c" path="res://scenes/shooter_spawner.tscn" id="4_22tt1"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1556592654]
+script = ExtResource("1_cuaqe")
 
 [node name="Player" parent="." unique_id=706497792 instance=ExtResource("1_j18ga")]
 position = Vector2(575, 327)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=63090145]
+position = Vector2(-2, 0)
 
-[node name="MeleeEnemySpawner" parent="Player" unique_id=1712358438 node_paths=PackedStringArray("node_ref") instance=ExtResource("3_xb7la")]
-position = Vector2(-5.364418e-07, 0)
-scale = Vector2(7.2414756, 8.0791855)
+[node name="MeleeSpawner" parent="Player" unique_id=1712358438 node_paths=PackedStringArray("node_ref") instance=ExtResource("3_xb7la")]
+scale = Vector2(7.241, 7.241)
 node_ref = NodePath("../..")
+
+[node name="ShooterSpawner" parent="Player" unique_id=728208852 node_paths=PackedStringArray("node_ref") instance=ExtResource("4_22tt1")]
+scale = Vector2(7.241, 7.241)
+node_ref = NodePath("../..")
+
+[node name="Timer" type="Timer" parent="." unique_id=1144351964]
+wait_time = 1200.0
+autostart = true
+script = ExtResource("2_xb7la")
+
+[connection signal="hit_p" from="Player/MeleeSpawner" to="." method="_on_melee_spawner_hit_p"]
+[connection signal="hit_p" from="Player/ShooterSpawner" to="." method="_on_shooter_spawner_hit_p"]
