@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bslpwtym03mkk"]
+
+[node name="Control" type="Control" unique_id=400638346]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=747579399]
+layout_mode = 0
+offset_right = 981.0
+offset_bottom = 397.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1741568068]
+layout_mode = 2
+text = "Inferno de Tiro"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=714715922]
+layout_mode = 2
+text = "Jogar"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1651865658]
+layout_mode = 2
+text = "Sair"
