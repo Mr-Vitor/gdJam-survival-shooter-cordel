@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjvro2xjye56c"]
 
-[ext_resource type="Script" uid="uid://c6tvemyp25khq" path="res://shooter_spawner.gd" id="1_y53sy"]
+[ext_resource type="Script" uid="uid://c6tvemyp25khq" path="res://scripts/Spawners/shooter_spawner.gd" id="1_y53sy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwrsp"]
 size = Vector2(158, 10)
@@ -16,7 +16,6 @@ script = ExtResource("1_y53sy")
 metadata/_custom_type_script = "uid://dqrw77o1ia8vg"
 
 [node name="Timer" type="Timer" parent="." unique_id=1242721187]
-wait_time = 0.5
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1257889454]

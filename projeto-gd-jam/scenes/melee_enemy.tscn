@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6xyu62uevis0"]
 
-[ext_resource type="Script" uid="uid://dn4ao336x4xpg" path="res://scripts/melee_enemy.gd" id="1_tq73k"]
+[ext_resource type="Script" uid="uid://lrmexu8qomqu" path="res://scripts/Enemies/shooter_enemy.gd" id="1_tq73k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tq73k"]
 
@@ -20,7 +20,6 @@ debug_color = Color(1.3957917e-06, 0.64570105, 0.2750296, 1)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1091769413]
 collision_layer = 2
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=12047215]
 shape = SubResource("CircleShape2D_xnaus")
