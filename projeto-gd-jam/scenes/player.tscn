@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://mmtvq02mmx52" path="res://resources/player_moving.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://blvm8j5lbvq1l" path="res://resources/player_stop.png" id="3_dqkch"]
 [ext_resource type="Script" uid="uid://cn7g5ve7u2ekf" path="res://scripts/resources/health.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dmg2b6g3m3xsg" path="res://scripts/resources/level_system.gd" id="5_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
 size = Vector2(148, 227)
@@ -59,3 +60,7 @@ frame_progress = 0.24426705
 [node name="Health" type="Node" parent="." unique_id=522763068]
 script = ExtResource("4_dqkch")
 metadata/_custom_type_script = "uid://cn7g5ve7u2ekf"
+
+[node name="Level_System" type="Node" parent="." unique_id=787713857]
+script = ExtResource("5_qlg0r")
+metadata/_custom_type_script = "uid://dmg2b6g3m3xsg"
