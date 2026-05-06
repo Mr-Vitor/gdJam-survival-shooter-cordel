@@ -1,17 +1,17 @@
 extends EnemyBase
 
-signal damage_to_player
+signal damage_to_player(damage: int)
 
 func _ready():
-	self.health = 12
-	self.dmg = 5
-	self.speed = 60
+	health = 12
+	dmg = 5
+	speed = 60
 
 
 func _physics_process(_delta):
-	self.enemy_movement()
+	enemy_movement()
 
 
 func _on_area_2d_body_entered(_body):
 	if !(_body.is_in_group("Enemies")):
-		damage_to_player.emit()
+		damage_to_player.emit(dmg)

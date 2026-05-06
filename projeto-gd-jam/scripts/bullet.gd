@@ -2,10 +2,10 @@ extends Area2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-signal dmg_dealt
+signal deal_damage
 
 var direction : Vector2
-var speed := 100
+var speed := 150
 
 func _ready():
 	get_tree().create_timer(3).timeout.connect(queue_free)
@@ -18,4 +18,6 @@ func _physics_process(_delta):
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		print("Toma seu mardito!")
-		#dmg_dealt.emit()
+		deal_damage.emit()
+
+		queue_free()

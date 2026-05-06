@@ -5,12 +5,11 @@
 [ext_resource type="Script" uid="uid://cpcgdyc6ocq86" path="res://scripts/level_timer.gd" id="2_xb7la"]
 [ext_resource type="PackedScene" uid="uid://bxpsij1gs3lmq" path="res://scenes/melee_spawner.tscn" id="3_xb7la"]
 [ext_resource type="PackedScene" uid="uid://cjvro2xjye56c" path="res://scenes/shooter_spawner.tscn" id="4_22tt1"]
-[ext_resource type="PackedScene" uid="uid://c6a8yotskph2o" path="res://scenes/shooter_enemy.tscn" id="6_vtlkh"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1556592654]
 script = ExtResource("1_cuaqe")
 
-[node name="Player" parent="." unique_id=706497792 instance=ExtResource("1_j18ga")]
+[node name="Player" parent="." unique_id=706497792 groups=["player"] instance=ExtResource("1_j18ga")]
 position = Vector2(575, 327)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=63090145]
@@ -29,9 +28,6 @@ wait_time = 1200.0
 one_shot = true
 autostart = true
 script = ExtResource("2_xb7la")
-
-[node name="ShooterEnemy" parent="." unique_id=98206405 instance=ExtResource("6_vtlkh")]
-position = Vector2(372, 337)
 
 [connection signal="hit_p" from="Player/MeleeSpawner" to="." method="_on_melee_spawner_hit_p"]
 [connection signal="hit_p" from="Player/ShooterSpawner" to="." method="_on_shooter_spawner_hit_p"]

@@ -23,7 +23,6 @@ func _process(_delta):
 		if current_time % 30 == 0 and current_time != 0:
 			spawn_rate_tick = true
 			spawn_rate_increase.emit(int(wait_time - current_time),spawn_rate_tick)
-			print("Signal-up")
 		else:
 			spawn_rate_tick = false
 	

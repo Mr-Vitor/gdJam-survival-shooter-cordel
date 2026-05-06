@@ -1,7 +1,7 @@
 class_name EnemySpawner
 extends Area2D
 
-signal hit_p
+signal hit_p(damage: int)
 
 @export var node_ref : Node2D # Scene reference to spawn enemies
 @onready var route = node_ref
@@ -38,7 +38,7 @@ func enemy_spawn():
 		# Adds enemy to current scene and increases enemy counter
 		var enemy = enemy_scene.instantiate()
 		enemy.position = enemy_spawn_point
-		enemy.damage_to_player.connect(hit)
+		enemy.damage_to_player.connect(_on_enemy_damage_to_player)
 		route.add_child(enemy)
 		enemy_counter += 1
 		enemy.add_to_group("Enemies")
@@ -47,8 +47,7 @@ func enemy_spawn_scale(time_left: int, tick: bool):
 	if time_left == self.intervals * 30 and tick:
 		self.max_enemies_on_screen += 3
 		self.intervals -= 1
-		print("Max enemy total: ", self.max_enemies_on_screen)
 
 # Enemy signaling damage to the player
-func hit():
-	hit_p.emit()
+func _on_enemy_damage_to_player(damage: int):
+	hit_p.emit(damage)
