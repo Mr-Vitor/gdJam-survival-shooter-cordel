@@ -1,7 +1,10 @@
 extends Timer
 
 signal shooter_start_spawn
+signal tank_start_spawn
+signal speedster_start_spawn
 signal spawn_rate_increase
+
 
 var spawn_rate_tick : bool
 var last_second := -1
@@ -17,7 +20,13 @@ func _process(_delta):
 		# Start spawning enemies according to in-game time
 		if current_time == 60: # Change to Match later
 			shooter_start_spawn.emit()
-		else: pass
+		elif current_time == 120:
+			tank_start_spawn.emit()
+		elif current_time == 180:
+			speedster_start_spawn.emit()
+		else:
+			pass
+			
 	
 		# Monitor game timer to scale enemy spawn-rate
 		if current_time % 30 == 0 and current_time != 0:

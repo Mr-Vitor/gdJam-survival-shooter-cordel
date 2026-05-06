@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dxuh07vcasdyi"]
+
+[ext_resource type="Script" uid="uid://dgfjc4cxqd45j" path="res://scripts/Enemies/speedster_enemy.gd" id="1_p1clj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3eu3i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvqth"]
+radius = 11.0
+
+[node name="SpeedsterEnemy" type="CharacterBody2D" unique_id=1498668978]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_p1clj")
+metadata/_custom_type_script = "uid://bnjosd0j20wdh"
+
+[node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=1921428838]
+shape = SubResource("CircleShape2D_3eu3i")
+debug_color = Color(0.9019608, 0, 0.14117648, 0.9137255)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1521552541]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1218441706]
+visible = false
+shape = SubResource("CircleShape2D_nvqth")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

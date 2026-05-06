@@ -2,6 +2,7 @@ class_name EnemyBase
 extends CharacterBody2D
 
 @onready var player:= get_node("/root/Testing Grounds/Player")
+@onready var exp_scene:= preload("res://scenes/exp_point.tscn")
 
 var health : float
 var speed : int
@@ -20,4 +21,12 @@ func enemy_movement():
 			#$AnimatedSprite2D.flip_h = velocity.x < 0
 	
 	else:
-		queue_free()
+		die()
+
+func die():
+	var exp_point = exp_scene.instantiate()
+	exp_point.position = position
+	get_parent().add_child(exp_point)
+	queue_free()
+
+	

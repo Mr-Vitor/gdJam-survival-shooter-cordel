@@ -14,9 +14,10 @@ var max_enemies_on_screen := 20
 var enemy_counter := 0
 
 var intervals := 39 # quantity of 30s intervals in gameplay
+# -1 interval per 30s
 
 # Code to spawn enemies from random spawn area
-func enemy_spawn():
+func enemy_manager():
 	if self.enable_spawn:
 		# Verifies spawn area presence
 		if spawn_points.is_empty():

@@ -2,14 +2,16 @@ extends EnemyBase
 
 signal damage_to_player(damage: int)
 
-func _ready():
-	health = 12
+func _ready() -> void:
+	health = 8
 	dmg = 5
-	speed = 60
+	speed = 75 
 
 func _physics_process(_delta):
 	enemy_movement()
 
+
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		damage_to_player.emit(dmg)
+		queue_free()

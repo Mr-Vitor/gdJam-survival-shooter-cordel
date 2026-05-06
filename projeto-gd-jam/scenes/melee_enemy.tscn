@@ -14,15 +14,16 @@ motion_mode = 1
 script = ExtResource("1_tq73k")
 metadata/_custom_type_script = "uid://bnjosd0j20wdh"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1811724545]
+[node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=1811724545]
 shape = SubResource("CircleShape2D_tq73k")
-debug_color = Color(1.3957917e-06, 0.64570105, 0.2750296, 1)
+debug_color = Color(0.5039095, 0.43029183, 1, 1)
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1091769413]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1091769413]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=12047215]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=12047215]
+visible = false
 shape = SubResource("CircleShape2D_xnaus")
 debug_color = Color(0.99607843, 0.043137256, 0, 0.4862745)
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

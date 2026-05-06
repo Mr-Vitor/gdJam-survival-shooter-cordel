@@ -17,7 +17,6 @@ func _physics_process(_delta):
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print("Toma seu mardito!")
 		deal_damage.emit()
 
 		queue_free()

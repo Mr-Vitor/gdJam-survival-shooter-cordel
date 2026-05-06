@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://dqrw77o1ia8vg"
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1257889454]
-position = Vector2(0, -46)
+position = Vector2(0, -54)
 shape = SubResource("RectangleShape2D_pwrsp")
 debug_color = Color(0.5075026, 0.49132288, 0.13769686, 0.52156866)
 
@@ -29,7 +29,7 @@ shape = SubResource("RectangleShape2D_4h0xp")
 debug_color = Color(0.5075026, 0.49132288, 0.13769686, 0.52156866)
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=441828030]
-position = Vector2(0, 46)
+position = Vector2(0, 54)
 rotation = -3.1415925
 shape = SubResource("RectangleShape2D_rgbx5")
 debug_color = Color(0.5075026, 0.49132288, 0.13769686, 0.52156866)
