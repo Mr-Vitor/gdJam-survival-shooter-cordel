@@ -6,6 +6,8 @@ const SPEED = 600.0
 @onready var health: Health = $Health
 
 func _ready():
+	add_to_group("player")
+	
 	health.damaged.connect(_on_damaged)
 	health.died.connect(_on_died)
 	health.healed.connect(_on_healed)

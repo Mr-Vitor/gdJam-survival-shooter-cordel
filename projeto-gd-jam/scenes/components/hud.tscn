@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://clfddudkea171"]
+
+[ext_resource type="Script" uid="uid://de60pgy7lvlsl" path="res://scripts/resources/life_bar.gd" id="1_y7dsf"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1799156450]
+script = ExtResource("1_y7dsf")
+
+[node name="LifeBar" type="Label" parent="." unique_id=2124880860]
+offset_left = 6.0
+offset_right = 46.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
