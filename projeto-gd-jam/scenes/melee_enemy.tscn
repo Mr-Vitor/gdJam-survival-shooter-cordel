@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://c6xyu62uevis0"]
 
 [ext_resource type="Script" uid="uid://dn4ao336x4xpg" path="res://scripts/Enemies/melee_enemy.gd" id="1_tq73k"]
+[ext_resource type="Texture2D" uid="uid://r34q0ysxhpcv" path="res://assets/melee.png" id="2_xnaus"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tq73k"]
+radius = 15.033297
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xnaus"]
-radius = 11.0
+radius = 18.0
 
 [node name="MeleeEnemy" type="CharacterBody2D" unique_id=811252632]
 collision_layer = 2
@@ -16,14 +18,18 @@ metadata/_custom_type_script = "uid://bnjosd0j20wdh"
 
 [node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=1811724545]
 shape = SubResource("CircleShape2D_tq73k")
-debug_color = Color(0.5039095, 0.43029183, 1, 1)
+debug_color = Color(0.5019608, 0.43137255, 1, 0.2784314)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1091769413]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=12047215]
-visible = false
 shape = SubResource("CircleShape2D_xnaus")
-debug_color = Color(0.99607843, 0.043137256, 0, 0.4862745)
+debug_color = Color(0.99607843, 0.043137256, 0, 0.24313726)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2136537473]
+position = Vector2(4, -4)
+scale = Vector2(0.18499999, 0.185)
+texture = ExtResource("2_xnaus")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

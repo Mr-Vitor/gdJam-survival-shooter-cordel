@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsyntfcupv1fc"
-path="res://.godot/imported/rock.png-287df246b05da9994798407cdfe616b7.ctex"
+uid="uid://r34q0ysxhpcv"
+path="res://.godot/imported/melee.png-28245cf2f7c0c2fe1ce01a41c26f39af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rock.png"
-dest_files=["res://.godot/imported/rock.png-287df246b05da9994798407cdfe616b7.ctex"]
+source_file="res://assets/melee.png"
+dest_files=["res://.godot/imported/melee.png-28245cf2f7c0c2fe1ce01a41c26f39af.ctex"]
 
 [params]
 
