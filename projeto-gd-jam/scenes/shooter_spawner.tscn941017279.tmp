@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cjvro2xjye56c"]
+
+[ext_resource type="Script" uid="uid://c6tvemyp25khq" path="res://scripts/Spawners/shooter_spawner.gd" id="1_y53sy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwrsp"]
+size = Vector2(158, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4h0xp"]
+size = Vector2(10, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgbx5"]
+size = Vector2(158, 10)
+
+[node name="ShooterSpawner" type="Area2D" unique_id=728208852]
+script = ExtResource("1_y53sy")
+metadata/_custom_type_script = "uid://dqrw77o1ia8vg"
+
+[node name="Timer" type="Timer" parent="." unique_id=1242721187]
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1257889454]
+position = Vector2(0, -54)
+shape = SubResource("RectangleShape2D_pwrsp")
+debug_color = Color(0.5075026, 0.49132288, 0.13769686, 0.52156866)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1164452899]
+position = Vector2(85, 0)
+shape = SubResource("RectangleShape2D_4h0xp")
+debug_color = Color(0.5075026, 0.49132288, 0.13769686, 0.52156866)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=441828030]
+position = Vector2(0, 54)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_rgbx5")
+debug_color = Color(0.5075026, 0.49132288, 0.13769686, 0.52156866)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=1168344254]
+position = Vector2(-85, 0)
+shape = SubResource("RectangleShape2D_4h0xp")
+debug_color = Color(0.5075026, 0.49132288, 0.13769686, 0.52156866)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
