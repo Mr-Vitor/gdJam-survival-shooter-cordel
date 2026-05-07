@@ -5,6 +5,10 @@ const SPEED = 600.0
 @onready var anim = $AnimatedSprite2D
 @onready var health: Health = $Health
 @onready var xp = $Level_System 
+@onready var attack_area = $MeleeAttackArea
+
+var isAttacking = false
+var facing_direction = Vector2.DOWN
 
 func _ready():
 	add_to_group("player")
@@ -15,6 +19,8 @@ func _ready():
 	
 	xp.xp_gained.connect(_on_xp_gained)
 	xp.level_up.connect(_on_level_up)
+
+	attack_area.monitoring = false
 
 func _on_damaged(amount: int, from: Node):
 	print("Tomou dano:", amount)
@@ -58,6 +64,7 @@ func _physics_process(_delta):
 	# normaliza diagonal
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
+		facing_direction = direction
 
 	velocity = direction * SPEED
 	move_and_slide()
@@ -71,3 +78,19 @@ func _physics_process(_delta):
 	# VIRAR SPRITE
 	if direction.x != 0:
 		anim.flip_h = direction.x < 0
+		
+	# Input de ataque
+	if Input.is_action_just_pressed("attack") and !isAttacking:
+		attack()
+		
+func attack():
+	isAttacking = true
+	update_attack_position()
+	attack_area.monitoring = true
+	await get_tree().create_timer(0.15).timeout
+	attack_area.monitoring = false
+	isAttacking = false
+
+func update_attack_position():
+	var distance = 200
+	attack_area.position = facing_direction * distance

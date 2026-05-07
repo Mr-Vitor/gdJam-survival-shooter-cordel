@@ -44,6 +44,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuyoq"]
+size = Vector2(147, 211.5)
+
 [node name="Player" type="CharacterBody2D" unique_id=706497792]
 z_index = 1
 script = ExtResource("1_3vyb7")
@@ -64,3 +67,9 @@ metadata/_custom_type_script = "uid://cn7g5ve7u2ekf"
 [node name="Level_System" type="Node" parent="." unique_id=787713857]
 script = ExtResource("5_qlg0r")
 metadata/_custom_type_script = "uid://dmg2b6g3m3xsg"
+
+[node name="MeleeAttackArea" type="Area2D" parent="." unique_id=1829888904]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea" unique_id=1372607369]
+position = Vector2(-0.5, -3.25)
+shape = SubResource("RectangleShape2D_tuyoq")
