@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cfoj4p0kt4gby"]
+
+[ext_resource type="Script" uid="uid://dqce3b20mtc8h" path="res://scripts/Enemies/tank_enemy.gd" id="1_oyqd1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jugj"]
+radius = 23.021729
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ubg1q"]
+radius = 23.0
+
+[node name="TankEnemy" type="CharacterBody2D" unique_id=1621593207]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_oyqd1")
+metadata/_custom_type_script = "uid://bnjosd0j20wdh"
+
+[node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=343818610]
+shape = SubResource("CircleShape2D_1jugj")
+debug_color = Color(0, 0.6745098, 0.21960784, 0.8862745)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=43495576]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=990844506]
+shape = SubResource("CircleShape2D_ubg1q")
+debug_color = Color(0.77515906, 0.4370007, 0.17169869, 0.41960785)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

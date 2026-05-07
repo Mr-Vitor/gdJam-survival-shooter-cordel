@@ -5,24 +5,39 @@
 [ext_resource type="Script" uid="uid://cpcgdyc6ocq86" path="res://scripts/level_timer.gd" id="2_xb7la"]
 [ext_resource type="PackedScene" uid="uid://bxpsij1gs3lmq" path="res://scenes/melee_spawner.tscn" id="3_xb7la"]
 [ext_resource type="PackedScene" uid="uid://cjvro2xjye56c" path="res://scenes/shooter_spawner.tscn" id="4_22tt1"]
-[ext_resource type="PackedScene" uid="uid://c6a8yotskph2o" path="res://scenes/shooter_enemy.tscn" id="6_vtlkh"]
+[ext_resource type="PackedScene" uid="uid://bkqewf7b3qv4l" path="res://scenes/tank_spawner.tscn" id="5_vtlkh"]
+[ext_resource type="PackedScene" uid="uid://fbv63k0jt7a3" path="res://scenes/speedster_spawner.tscn" id="6_xg72j"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1556592654]
 script = ExtResource("1_cuaqe")
+metadata/_edit_vertical_guides_ = [-755.0, -567.0, -2745.0]
 
-[node name="Player" parent="." unique_id=706497792 instance=ExtResource("1_j18ga")]
+[node name="Player" parent="." unique_id=706497792 groups=["player"] instance=ExtResource("1_j18ga")]
 position = Vector2(575, 327)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=63090145]
 position = Vector2(-2, 0)
+zoom = Vector2(1.1, 1.1)
 
-[node name="MeleeSpawner" parent="Player" unique_id=1712358438 node_paths=PackedStringArray("node_ref") instance=ExtResource("3_xb7la")]
-scale = Vector2(7.241, 7.241)
-node_ref = NodePath("../..")
+[node name="MeleeSpawner" parent="Player/Camera2D" unique_id=1712358438 node_paths=PackedStringArray("node_ref") instance=ExtResource("3_xb7la")]
+position = Vector2(2, 0)
+scale = Vector2(8, 8)
+node_ref = NodePath("../../..")
 
-[node name="ShooterSpawner" parent="Player" unique_id=728208852 node_paths=PackedStringArray("node_ref") instance=ExtResource("4_22tt1")]
-scale = Vector2(7.241, 7.241)
-node_ref = NodePath("../..")
+[node name="ShooterSpawner" parent="Player/Camera2D" unique_id=728208852 node_paths=PackedStringArray("node_ref") instance=ExtResource("4_22tt1")]
+position = Vector2(2, 0)
+scale = Vector2(8, 8)
+node_ref = NodePath("../../..")
+
+[node name="TankSpawner" parent="Player/Camera2D" unique_id=1086145771 node_paths=PackedStringArray("node_ref") instance=ExtResource("5_vtlkh")]
+position = Vector2(2, 0)
+scale = Vector2(8, 8)
+node_ref = NodePath("../../..")
+
+[node name="SpeedsterSpawner" parent="Player/Camera2D" unique_id=1080710608 node_paths=PackedStringArray("node_ref") instance=ExtResource("6_xg72j")]
+position = Vector2(2, 0)
+scale = Vector2(8, 8)
+node_ref = NodePath("../../..")
 
 [node name="Timer" type="Timer" parent="." unique_id=1144351964]
 wait_time = 1200.0
@@ -30,10 +45,11 @@ one_shot = true
 autostart = true
 script = ExtResource("2_xb7la")
 
-[node name="ShooterEnemy" parent="." unique_id=98206405 instance=ExtResource("6_vtlkh")]
-position = Vector2(372, 337)
-
-[connection signal="hit_p" from="Player/MeleeSpawner" to="." method="_on_melee_spawner_hit_p"]
-[connection signal="hit_p" from="Player/ShooterSpawner" to="." method="_on_shooter_spawner_hit_p"]
+[connection signal="hit_p" from="Player/Camera2D/MeleeSpawner" to="." method="_on_melee_spawner_hit_p"]
+[connection signal="hit_p" from="Player/Camera2D/ShooterSpawner" to="." method="_on_shooter_spawner_hit_p"]
+[connection signal="hit_p" from="Player/Camera2D/TankSpawner" to="." method="_on_tank_spawner_hit_p"]
+[connection signal="hit_p" from="Player/Camera2D/SpeedsterSpawner" to="." method="_on_speedster_spawner_hit_p"]
 [connection signal="shooter_start_spawn" from="Timer" to="." method="_on_timer_shooter_start_spawn"]
 [connection signal="spawn_rate_increase" from="Timer" to="." method="_on_timer_spawn_rate_increase"]
+[connection signal="speedster_start_spawn" from="Timer" to="." method="_on_timer_speedster_start_spawn"]
+[connection signal="tank_start_spawn" from="Timer" to="." method="_on_timer_tank_start_spawn"]

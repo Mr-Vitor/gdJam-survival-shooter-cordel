@@ -11,4 +11,4 @@ func _ready():
 
 # Spawns enemy upon timer reaching 0
 func _on_timer_timeout():
-	enemy_spawn() 
+	enemy_manager() 

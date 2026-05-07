@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://40gmrwqfpkok"]
+
+[ext_resource type="Script" uid="uid://q3emwxkttv2i" path="res://scripts/exp_point.gd" id="1_ckwi1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pd7in"]
+radius = 28.01785
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u44ft"]
+radius = 8.062258
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ckwi1"]
+radius = 8.0
+
+[node name="ExpPoint" type="CharacterBody2D" unique_id=241805880]
+collision_layer = 8
+script = ExtResource("1_ckwi1")
+
+[node name="AttractRange" type="Area2D" parent="." unique_id=1450561278]
+
+[node name="Detection" type="CollisionShape2D" parent="AttractRange" unique_id=2087938852]
+shape = SubResource("CircleShape2D_pd7in")
+debug_color = Color(0.76686835, 0.92978495, 0.99351794, 0.39607844)
+
+[node name="PickupRange" type="Area2D" parent="." unique_id=1829679852]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange" unique_id=137873824]
+shape = SubResource("CircleShape2D_u44ft")
+debug_color = Color(0.7254902, 0.60784316, 0.078431375, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=319965089]
+visible = false
+shape = SubResource("CircleShape2D_ckwi1")
+disabled = true
+
+[connection signal="body_entered" from="AttractRange" to="." method="_on_attract_range_body_entered"]
+[connection signal="body_entered" from="PickupRange" to="." method="_on_pickup_range_body_entered"]
