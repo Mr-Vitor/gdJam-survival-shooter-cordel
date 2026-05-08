@@ -10,6 +10,7 @@ offset_left = 5.0
 offset_top = 1.0
 offset_right = 45.0
 offset_bottom = 24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -18,5 +19,6 @@ offset_left = 6.0
 offset_top = 19.0
 offset_right = 46.0
 offset_bottom = 42.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1

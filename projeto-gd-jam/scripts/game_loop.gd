@@ -9,33 +9,29 @@ extends Node2D
 # Damage signals
 # --- Melee ---
 func _on_melee_spawner_hit_p(damage: int):
-	if player.health > 0:
-		player.health -= damage
-		print(player.health)
+	if player.health.hp > 0:
+		player.health.apply_damage(damage)
 	else:
 		print("You Died!")
 
 # --- Shooter ---
 func _on_shooter_spawner_hit_p(damage: int):
-	if player.health > 0:
-		player.health -= damage
-		print(player.health)
+	if player.health.hp > 0:
+		player.health.apply_damage(damage)
 	else:
 		print("You Died!")
 
 # --- Tank ---
 func _on_tank_spawner_hit_p(damage: int) -> void:
-	if player.health > 0:
-		player.health -= damage
-		print(player.health)
+	if player.health.hp > 0:
+		player.health.apply_damage(damage)
 	else:
 		print("You Died!")
 
 # --- Speedster ---
 func _on_speedster_spawner_hit_p(damage: int) -> void:
-	if player.health > 0:
-		player.health -= damage
-		print(player.health)
+	if player.health.hp > 0:
+		player.health.apply_damage(damage)
 	else:
 		print("You Died!")
 

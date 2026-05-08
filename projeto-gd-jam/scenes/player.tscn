@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dmg2b6g3m3xsg" path="res://scripts/resources/level_system.gd" id="5_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
-size = Vector2(148, 227)
+size = Vector2(40, 55)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("2_qhqgy")
@@ -45,20 +45,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuyoq"]
-size = Vector2(147, 211.5)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3vyb7"]
-size = Vector2(16, 20)
+size = Vector2(40, 56)
 
 [node name="Player" type="CharacterBody2D" unique_id=706497792]
 z_index = 1
+collision_mask = 3
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=222219855]
-position = Vector2(-1, -10.5)
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1395573742]
+scale = Vector2(0.263, 0.263)
 sprite_frames = SubResource("SpriteFrames_smehm")
 animation = &"moving"
 frame_progress = 0.24426705
@@ -72,7 +71,11 @@ script = ExtResource("5_qlg0r")
 metadata/_custom_type_script = "uid://dmg2b6g3m3xsg"
 
 [node name="MeleeAttackArea" type="Area2D" parent="." unique_id=1829888904]
+collision_layer = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea" unique_id=1372607369]
-position = Vector2(-0.5, -3.25)
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_tuyoq")
+
+[connection signal="body_entered" from="MeleeAttackArea" to="." method="_on_melee_attack_area_body_entered"]

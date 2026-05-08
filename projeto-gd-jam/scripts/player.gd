@@ -9,6 +9,7 @@ const SPEED = 600.0
 
 var isAttacking = false
 var facing_direction = Vector2.DOWN
+var knockback := Vector2.ZERO
 
 func _ready():
 	add_to_group("player")
@@ -20,7 +21,8 @@ func _ready():
 	xp.xp_gained.connect(_on_xp_gained)
 	xp.level_up.connect(_on_level_up)
 
-	attack_area.monitoring = false
+	attack_area.monitoring = true
+	attack_area.monitorable = true
 
 func _on_damaged(amount: int, from: Node):
 	print("Tomou dano:", amount)
@@ -67,6 +69,8 @@ func _physics_process(_delta):
 		facing_direction = direction
 
 	velocity = direction * SPEED
+	knockback = knockback.move_toward(Vector2.ZERO, 20)
+	velocity += knockback
 	move_and_slide()
 
 	# ANIMAÇÃO
@@ -86,11 +90,13 @@ func _physics_process(_delta):
 func attack():
 	isAttacking = true
 	update_attack_position()
-	attack_area.monitoring = true
+	var bodies = attack_area.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("enemies"):
+			body.take_damage(5, self)
 	await get_tree().create_timer(0.15).timeout
-	attack_area.monitoring = false
 	isAttacking = false
 
 func update_attack_position():
-	var distance = 200
+	var distance = 40
 	attack_area.position = facing_direction * distance

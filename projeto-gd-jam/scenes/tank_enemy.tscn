@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cfoj4p0kt4gby"]
 
 [ext_resource type="Script" uid="uid://dqce3b20mtc8h" path="res://scripts/Enemies/tank_enemy.gd" id="1_oyqd1"]
+[ext_resource type="Script" uid="uid://cn7g5ve7u2ekf" path="res://scripts/resources/health.gd" id="2_1jugj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1jugj"]
 radius = 23.021729
@@ -24,5 +25,9 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=990844506]
 shape = SubResource("CircleShape2D_ubg1q")
 debug_color = Color(0.77515906, 0.4370007, 0.17169869, 0.41960785)
+
+[node name="Health" type="Node" parent="." unique_id=843600624]
+script = ExtResource("2_1jugj")
+metadata/_custom_type_script = "uid://cn7g5ve7u2ekf"
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

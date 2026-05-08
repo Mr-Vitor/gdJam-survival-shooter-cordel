@@ -3,7 +3,10 @@ extends EnemyBase
 signal damage_to_player(damage: int)
 
 func _ready():
-	health = 12
+	
+	super()
+	health.max_hp = 12
+	health.hp = 12
 	dmg = 5
 	speed = 60
 
