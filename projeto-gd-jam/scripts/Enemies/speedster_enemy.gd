@@ -8,7 +8,7 @@ func _ready() -> void:
 	speed = 75 
 
 func _physics_process(_delta):
-	enemy_movement()
+	enemy_movement(_delta)
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:

@@ -47,6 +47,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuyoq"]
 size = Vector2(147, 211.5)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3vyb7"]
+size = Vector2(16, 20)
+
 [node name="Player" type="CharacterBody2D" unique_id=706497792]
 z_index = 1
 script = ExtResource("1_3vyb7")
