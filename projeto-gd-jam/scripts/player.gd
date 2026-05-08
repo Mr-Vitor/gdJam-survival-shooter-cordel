@@ -1,17 +1,96 @@
 extends CharacterBody2D
 
-var health := 100
-var SPEED = 100.0
+const SPEED = 600.0
+
+@onready var anim = $AnimatedSprite2D
+@onready var health: Health = $Health
+@onready var xp = $Level_System 
+@onready var attack_area = $MeleeAttackArea
+
+var isAttacking = false
+var facing_direction = Vector2.DOWN
+
+func _ready():
+	add_to_group("player")
+	
+	health.damaged.connect(_on_damaged)
+	health.died.connect(_on_died)
+	health.healed.connect(_on_healed)
+	
+	xp.xp_gained.connect(_on_xp_gained)
+	xp.level_up.connect(_on_level_up)
+
+	attack_area.monitoring = false
+
+func _on_damaged(amount: int, from: Node):
+	print("Tomou dano:", amount)
+	anim.modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	anim.modulate = Color.WHITE
+
+func _on_died(from: Node):
+	print("Player morreu")
+
+	queue_free()
+	get_tree().reload_current_scene()
+
+func _on_healed(amount: int):
+	print("Curou:", amount)
+
+func _on_xp_gained(amount: int):
+	print("Ganhou XP: ", amount)
+	
+func _on_level_up(level:int):
+	print("Subiu de Nível!!! \nNivel atual: ", level) 
+
+func _process(delta):
+
+	# Funções de debug
+	if Input.is_action_just_pressed("debug_damage"):
+		health.apply_damage(1)
+
+	if Input.is_action_just_pressed("debug_heal"):
+		health.heal(1)
+		
+	if Input.is_action_just_pressed("debug_xp"):
+		xp.add_xp(5)
 
 func _physics_process(_delta):
-	var direction_x := Input.get_axis("ui_left", "ui_right")
-	var direction_y := Input.get_axis("ui_up", "ui_down")
-	
-	if direction_x or direction_y:
-		velocity.x = direction_x * SPEED
-		velocity.y = direction_y * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+	var direction = Vector2(
+		Input.get_axis("left", "right"),
+		Input.get_axis("up", "down")
+	)
 
+	# normaliza diagonal
+	if direction != Vector2.ZERO:
+		direction = direction.normalized()
+		facing_direction = direction
+
+	velocity = direction * SPEED
 	move_and_slide()
+
+	# ANIMAÇÃO
+	if direction == Vector2.ZERO:
+		anim.play("stop")
+	else:
+		anim.play("moving")
+
+	# VIRAR SPRITE
+	if direction.x != 0:
+		anim.flip_h = direction.x < 0
+		
+	# Input de ataque
+	if Input.is_action_just_pressed("attack") and !isAttacking:
+		attack()
+		
+func attack():
+	isAttacking = true
+	update_attack_position()
+	attack_area.monitoring = true
+	await get_tree().create_timer(0.15).timeout
+	attack_area.monitoring = false
+	isAttacking = false
+
+func update_attack_position():
+	var distance = 200
+	attack_area.position = facing_direction * distance
