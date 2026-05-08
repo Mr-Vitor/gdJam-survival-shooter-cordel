@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://r34q0ysxhpcv" path="res://assets/melee.png" id="2_xnaus"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tq73k"]
-radius = 15.033297
+radius = 23.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xnaus"]
-radius = 18.0
+radius = 27.0
 
 [node name="MeleeEnemy" type="CharacterBody2D" unique_id=811252632]
 collision_layer = 2
@@ -28,8 +28,8 @@ shape = SubResource("CircleShape2D_xnaus")
 debug_color = Color(0.99607843, 0.043137256, 0, 0.24313726)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2136537473]
-position = Vector2(4, -4)
-scale = Vector2(0.18499999, 0.185)
+position = Vector2(2.3841858e-07, -4)
+scale = Vector2(0.263, 0.263)
 texture = ExtResource("2_xnaus")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

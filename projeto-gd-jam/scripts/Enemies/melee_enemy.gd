@@ -8,7 +8,7 @@ func _ready():
 	speed = 60
 
 func _physics_process(_delta):
-	enemy_movement()
+	enemy_movement(_delta)
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

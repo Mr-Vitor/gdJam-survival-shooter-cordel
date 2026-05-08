@@ -14,7 +14,7 @@ func _ready():
 	speed = 40
 
 func _physics_process(_delta):
-	enemy_movement()
+	enemy_movement(_delta)
 
 # Create and shoot bullet
 # On contact with player, emits signal to deal damage

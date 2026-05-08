@@ -4,9 +4,15 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3vyb7"]
+size = Vector2(16, 20)
+
 [node name="Player" type="CharacterBody2D" unique_id=706497792]
 z_index = 1
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=222219855]
 shape = SubResource("CapsuleShape2D_3vyb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=882342441]
+texture = SubResource("PlaceholderTexture2D_3vyb7")
