@@ -3,13 +3,22 @@ extends CharacterBody2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var exp_scene:= preload("res://scenes/exp_point.tscn")
-@onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var health: Health = $Health
 
+var health : int: set = _set_health
+var max_health : int: set = _set_max_health
 var speed : int
 var dmg : int
 var direction : Vector2
 var knockback: Vector2
+var player_inside:= false
+
+func _set_max_health(value: int):
+	max_health = value
+	$HP.max_value = value
+
+func _set_health(value: int):
+	health = value
+	$HP.value = value
 
 func _ready():
 	add_to_group("enemies")
@@ -26,12 +35,8 @@ func enemy_movement(delta):
 
 		var collider = move_and_collide(velocity * delta)
 		if collider:
-			collider.get_collider().knockback = (
-				collider.get_collider().global_position - global_position
-			).normalized() * 30
-
-		if velocity.x != 0:
-			sprite_2d.flip_h = velocity.x < 0
+			collider.get_collider().knockback = (collider.get_collider().global_position - 
+			global_position).normalized() * 30
 	
 	else:
 		die()

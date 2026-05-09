@@ -1,12 +1,13 @@
 extends CharacterBody2D
 
-const SPEED = 600.0
+const SPEED = 110.0
 
 @onready var anim = $AnimatedSprite2D
 @onready var health: Health = $Health
 @onready var xp = $Level_System 
 @onready var attack_area = $MeleeAttackArea
 
+var knockback: Vector2
 var isAttacking = false
 var facing_direction = Vector2.DOWN
 var knockback := Vector2.ZERO
@@ -24,13 +25,13 @@ func _ready():
 	attack_area.monitoring = true
 	attack_area.monitorable = true
 
-func _on_damaged(amount: int, from: Node):
+func _on_damaged(amount: int):
 	print("Tomou dano:", amount)
 	anim.modulate = Color.RED
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.5).timeout
 	anim.modulate = Color.WHITE
 
-func _on_died(from: Node):
+func _on_died():
 	print("Player morreu")
 
 	queue_free()
@@ -45,8 +46,7 @@ func _on_xp_gained(amount: int):
 func _on_level_up(level:int):
 	print("Subiu de Nível!!! \nNivel atual: ", level) 
 
-func _process(delta):
-
+func _process(_delta):
 	# Funções de debug
 	if Input.is_action_just_pressed("debug_damage"):
 		health.apply_damage(1)
