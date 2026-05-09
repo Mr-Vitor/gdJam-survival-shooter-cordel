@@ -5,8 +5,8 @@ signal damaged(amount: int, from: Node)
 signal died(from: Node)
 signal healed(amount: int)
 
-@export var max_hp: int = 10
-@export var invincibility_time: float = 0.5
+@export var max_hp: int = 150
+@export var invincibility_time: float = 0.75
 
 var hp: int 
 var invincible: bool = false
@@ -22,11 +22,11 @@ func reset() -> void:
 	invincible = false
 	_last_damage_frame = -1
 	
-func apply_damage(amount: int, from: Node = null) -> bool:
-	if amount <= 0:
-		return false
-	if hp <= 0:
-		return false
+func apply_damage(amount: int) -> bool:
+	if hp - amount <= 0:
+		emit_signal("died")
+		return true
+		
 	if invincible:
 		return false
 		
@@ -36,11 +36,8 @@ func apply_damage(amount: int, from: Node = null) -> bool:
 	_last_damage_frame = current_frame
 	
 	hp = max(hp - amount, 0)
-	emit_signal("damaged", amount, from)
-	
-	if hp == 0:
-		emit_signal("died", from)
-		return true
+	emit_signal("damaged", amount)
+
 		
 	_start_invincibility()
 	return true
@@ -62,4 +59,4 @@ func _start_invincibility() -> void:
 	
 	# timer simples
 	await get_tree().create_timer(invincibility_time).timeout
-	invincible = false			
+	invincible = false

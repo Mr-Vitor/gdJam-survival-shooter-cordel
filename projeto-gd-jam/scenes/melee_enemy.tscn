@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://r34q0ysxhpcv" path="res://assets/melee.png" id="2_xnaus"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tq73k"]
-radius = 23.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xnaus"]
-radius = 27.0
+radius = 24.0
 
 [node name="MeleeEnemy" type="CharacterBody2D" unique_id=811252632]
 collision_layer = 2
@@ -29,7 +29,22 @@ debug_color = Color(0.99607843, 0.043137256, 0, 0.24313726)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2136537473]
 position = Vector2(2.3841858e-07, -4)
-scale = Vector2(0.263, 0.263)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_xnaus")
 
+[node name="DamageTimer" type="Timer" parent="." unique_id=846540476]
+wait_time = 0.2
+
+[node name="HP" type="ProgressBar" parent="." unique_id=1632979855]
+modulate = Color(1, 0, 0, 1)
+offset_left = -13.0
+offset_top = 26.0
+offset_right = 13.0
+offset_bottom = 30.0
+step = 1.0
+value = 100.0
+show_percentage = false
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

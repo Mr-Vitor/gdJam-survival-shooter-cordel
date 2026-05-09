@@ -9,35 +9,23 @@ extends Node2D
 # Damage signals
 # --- Melee ---
 func _on_melee_spawner_hit_p(damage: int):
-	if player.health > 0:
-		player.health -= damage
-		print(player.health)
-	else:
-		print("You Died!")
+	if player.health.hp > 0:
+		player.health.apply_damage(damage)
 
 # --- Shooter ---
 func _on_shooter_spawner_hit_p(damage: int):
-	if player.health > 0:
-		player.health -= damage
-		print(player.health)
-	else:
-		print("You Died!")
+	if player.health.hp > 0:
+		player.health.apply_damage(damage)
 
 # --- Tank ---
 func _on_tank_spawner_hit_p(damage: int) -> void:
-	if player.health > 0:
-		player.health -= damage
-		print(player.health)
-	else:
-		print("You Died!")
+	if player.health.hp > 0:
+		player.health.apply_damage(damage)
 
 # --- Speedster ---
 func _on_speedster_spawner_hit_p(damage: int) -> void:
-	if player.health > 0:
-		player.health -= damage
-		print(player.health)
-	else:
-		print("You Died!")
+	if player.health.hp > 0:
+		player.health.apply_damage(damage)
 
 # Spawn time signals
 # --- Shooter ---
@@ -56,3 +44,5 @@ func _on_timer_speedster_start_spawn() -> void:
 func _on_timer_spawn_rate_increase(time_left: int, spawn_rate_tick: bool) -> void:
 	melee_spawner.enemy_spawn_scale(time_left, spawn_rate_tick)
 	shooter_spawner.enemy_spawn_scale(time_left, spawn_rate_tick)
+	tank_spawner.enemy_spawn_scale(time_left, spawn_rate_tick)
+	speedster_spawner.enemy_spawn_scale(time_left, spawn_rate_tick)

@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://mm1tl1uec3qf" path="res://assets/shooter.png" id="2_ve5yo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ve5yo"]
-radius = 23.0
+radius = 21.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ena3m"]
-radius = 27.0
+radius = 24.020824
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_id4l2"]
-radius = 150.0
+radius = 135.0
 
 [node name="ShooterEnemy" type="CharacterBody2D" unique_id=98206405 node_paths=PackedStringArray("shooting_cooldown")]
 collision_layer = 2
@@ -34,6 +34,7 @@ debug_color = Color(0.99607843, 0.043137256, 0, 0.4862745)
 collision_layer = 2
 
 [node name="DetectPlayer" type="CollisionShape2D" parent="ShootingArea" unique_id=465644525]
+position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_id4l2")
 debug_color = Color(0, 0.62352943, 0.5372549, 0.13725491)
 
@@ -42,10 +43,14 @@ wait_time = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1768727132]
 position = Vector2(0, -4)
-scale = Vector2(0.263, 0.263)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_ve5yo")
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=944599320]
+wait_time = 0.2
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="ShootingArea" to="." method="_on_shooting_area_body_entered"]
 [connection signal="body_exited" from="ShootingArea" to="." method="_on_shooting_area_body_exited"]
 [connection signal="timeout" from="ShootingArea/ShootingCooldown" to="." method="_on_shooting_cooldown_timeout"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://cfoj4p0kt4gby"]
 
 [ext_resource type="Script" uid="uid://dqce3b20mtc8h" path="res://scripts/Enemies/tank_enemy.gd" id="1_oyqd1"]
+[ext_resource type="Texture2D" uid="uid://coyupilj1kywb" path="res://assets/tank_spritesheet.png" id="2_1jugj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1jugj"]
-radius = 23.021729
+radius = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ubg1q"]
-radius = 23.0
+radius = 30.0
 
 [node name="TankEnemy" type="CharacterBody2D" unique_id=1621593207]
 collision_layer = 2
@@ -24,5 +25,12 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=990844506]
 shape = SubResource("CircleShape2D_ubg1q")
 debug_color = Color(0.77515906, 0.4370007, 0.17169869, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1530372249]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_1jugj")
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=241958645]
+wait_time = 0.2
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

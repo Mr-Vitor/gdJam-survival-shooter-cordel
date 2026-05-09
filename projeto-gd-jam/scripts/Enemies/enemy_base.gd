@@ -3,13 +3,22 @@ extends CharacterBody2D
 
 @onready var player:= get_node("/root/Testing Grounds/Player")
 @onready var exp_scene:= preload("res://scenes/exp_point.tscn")
-@onready var sprite_2d: Sprite2D = $Sprite2D
 
-var health : float
+var health : int: set = _set_health
+var max_health : int: set = _set_max_health
 var speed : int
 var dmg : int
 var direction : Vector2
 var knockback: Vector2
+var player_inside:= false
+
+func _set_max_health(value: int):
+	max_health = value
+	$HP.max_value = value
+
+func _set_health(value: int):
+	health = value
+	$HP.value = value
 
 func enemy_movement(delta):
 	if self.health > 0:
@@ -22,9 +31,6 @@ func enemy_movement(delta):
 		if collider:
 			collider.get_collider().knockback = (collider.get_collider().global_position - 
 			global_position).normalized() * 30
-		
-		if velocity.x != 0:
-			sprite_2d.flip_h = velocity.x < 10
 	
 	else:
 		die()
