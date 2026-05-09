@@ -50,6 +50,7 @@ size = Vector2(147, 211.5)
 
 [node name="Player" type="CharacterBody2D" unique_id=706497792]
 z_index = 1
+collision_mask = 3
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=222219855]
@@ -71,7 +72,11 @@ script = ExtResource("5_qlg0r")
 metadata/_custom_type_script = "uid://dmg2b6g3m3xsg"
 
 [node name="MeleeAttackArea" type="Area2D" parent="." unique_id=1829888904]
+collision_layer = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea" unique_id=1372607369]
-position = Vector2(-0.5, -3.25)
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_tuyoq")
+
+[connection signal="body_entered" from="MeleeAttackArea" to="." method="_on_melee_attack_area_body_entered"]

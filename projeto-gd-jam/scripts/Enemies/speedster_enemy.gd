@@ -5,7 +5,9 @@ signal damage_to_player(damage: int)
 @onready var damage_timer:= $DamageTimer
 
 func _ready() -> void:
-	health = 8
+	super()
+	health.max_hp = 8
+	health.hp = 8
 	dmg = 5
 	speed = 75 
 	anim.play("Chase")

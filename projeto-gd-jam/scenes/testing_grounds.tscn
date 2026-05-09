@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://wfcsolry7gtx" path="res://scripts/game_loop.gd" id="1_cuaqe"]
 [ext_resource type="PackedScene" uid="uid://ba54vgavh75ph" path="res://scenes/player.tscn" id="1_j18ga"]
 [ext_resource type="Texture2D" uid="uid://dlc78pckdeexj" path="res://assets/tilemap.jpeg" id="2_7wc35"]
+[ext_resource type="PackedScene" uid="uid://clfddudkea171" path="res://scenes/components/hud.tscn" id="2_vqimk"]
 [ext_resource type="Script" uid="uid://cpcgdyc6ocq86" path="res://scripts/level_timer.gd" id="2_xb7la"]
 [ext_resource type="Texture2D" uid="uid://deeait6owjdit" path="res://assets/spritesheet_yellow.png" id="3_aj7pq"]
 [ext_resource type="Texture2D" uid="uid://xldd3u7w617y" path="res://assets/Tilemap_yellow.png" id="3_hyw5d"]
@@ -404,6 +405,8 @@ sources/1 = SubResource("TileSetAtlasSource_hyw5d")
 [node name="Testing Grounds" type="Node2D" unique_id=1556592654]
 script = ExtResource("1_cuaqe")
 metadata/_edit_vertical_guides_ = [-755.0, -567.0, -2745.0]
+
+[node name="HUD" parent="." unique_id=1799156450 instance=ExtResource("2_vqimk")]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=257577649]
 repeat_size = Vector2(1120, 640)

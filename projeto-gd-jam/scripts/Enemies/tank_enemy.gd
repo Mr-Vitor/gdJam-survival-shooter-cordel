@@ -5,7 +5,9 @@ signal damage_to_player(damage: int)
 @onready var damage_timer:= $DamageTimer
 
 func _ready() -> void:
-	health = 40
+	super()
+	health.max_hp = 40
+	health.hp = 40
 	dmg = 12
 	speed = 40
 
