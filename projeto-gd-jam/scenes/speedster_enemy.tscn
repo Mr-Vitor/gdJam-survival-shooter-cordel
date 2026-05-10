@@ -61,4 +61,14 @@ animation = &"Chase"
 [node name="DamageTimer" type="Timer" parent="." unique_id=1693449186]
 wait_time = 0.2
 
+[node name="HP" type="ProgressBar" parent="." unique_id=181454383]
+modulate = Color(1, 0, 0, 1)
+offset_left = -13.0
+offset_top = 20.0
+offset_right = 13.0
+offset_bottom = 24.0
+step = 1.0
+value = 100.0
+show_percentage = false
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -7,6 +7,7 @@ func _ready():
 			spawn_points.append(i)
 			
 	enable_spawn = true
+	intervals = 9
 	
 # Spawns enemy upon timer reaching 0
 func _on_timer_timeout():
