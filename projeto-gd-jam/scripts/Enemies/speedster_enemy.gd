@@ -9,7 +9,7 @@ func _ready() -> void:
 	max_health = 8
 	health = 8
 	dmg = 5
-	speed = 75 
+	speed = 35 
 	anim.play("Chase")
 
 func _physics_process(_delta):

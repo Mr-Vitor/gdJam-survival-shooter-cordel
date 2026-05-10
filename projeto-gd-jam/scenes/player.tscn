@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://cn7g5ve7u2ekf" path="res://scripts/resources/health.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dmg2b6g3m3xsg" path="res://scripts/resources/level_system.gd" id="5_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://ish16o6ah81l" path="res://assets/slash_sprite.png" id="6_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://cdh2yyq6wkd7k" path="res://resources/sword_hit.mp3" id="7_fjrip"]
+[ext_resource type="AudioStream" uid="uid://bxa411u3eppai" path="res://resources/player_hited.mp3" id="8_smehm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
 radius = 12.0
@@ -120,6 +122,12 @@ metadata/_custom_type_script = "uid://cn7g5ve7u2ekf"
 [node name="Level_System" type="Node" parent="." unique_id=787713857]
 script = ExtResource("5_qlg0r")
 metadata/_custom_type_script = "uid://dmg2b6g3m3xsg"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=548124997]
+stream = ExtResource("7_fjrip")
+
+[node name="PlayerHitedSound" type="AudioStreamPlayer2D" parent="." unique_id=413862592]
+stream = ExtResource("8_smehm")
 
 [connection signal="body_entered" from="MeleeAttackArea" to="." method="_on_melee_attack_area_body_entered"]
 [connection signal="timeout" from="Attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

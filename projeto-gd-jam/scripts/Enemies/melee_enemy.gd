@@ -10,7 +10,7 @@ func _ready():
 	health = 12
 	max_health = 12
 	dmg = 5
-	speed = 60
+	speed = 25
 	add_to_group("enemies")
 
 func _physics_process(_delta):

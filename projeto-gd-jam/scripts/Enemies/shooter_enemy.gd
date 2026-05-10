@@ -17,7 +17,7 @@ func _ready():
 	max_health = 18
 	health = 18
 	dmg = 7
-	speed = 40
+	speed = 20
 
 func _physics_process(_delta):
 	enemy_movement(_delta)
