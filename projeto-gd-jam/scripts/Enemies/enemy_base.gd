@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var exp_scene:= preload("res://scenes/exp_point.tscn")
 
+signal enemy_death
+
 var health : int: set = _set_health
 var max_health : int: set = _set_max_health
 var speed : int
@@ -19,15 +21,14 @@ func _set_max_health(value: int):
 func _set_health(value: int):
 	health = value
 	$HP.value = value
+	$HP.visible = value < max_health
 
 func _ready():
 	add_to_group("enemies")
-	health.damaged.connect(_on_damaged)
-	health.died.connect(_on_died)
 
 func enemy_movement(delta):
 	
-	if health.hp > 0:
+	if health > 0:
 		direction = (player.position - position).normalized()
 		velocity = direction * speed
 		knockback = knockback.move_toward(Vector2.ZERO, 1)
@@ -41,21 +42,12 @@ func enemy_movement(delta):
 	else:
 		die()
 
-func take_damage(amount: int, from = null):
-	health.apply_damage(amount, from)
-
-func _on_damaged(amount, from):
-	sprite_2d.modulate = Color.RED
-	await get_tree().create_timer(0.1).timeout
-	sprite_2d.modulate = Color.WHITE
-
-func _on_died(from):
-	die()
+func take_damage(damage: int):
+	_set_health(health - damage)
 
 func die():
 	var exp_point = exp_scene.instantiate()
 	exp_point.position = position
 	get_parent().add_child(exp_point)
+	enemy_death.emit()
 	queue_free()
-
-	

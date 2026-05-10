@@ -6,10 +6,12 @@ signal damage_to_player(damage: int)
 
 
 func _ready():
+	super()
 	health = 12
 	max_health = 12
 	dmg = 5
 	speed = 60
+	add_to_group("enemies")
 
 func _physics_process(_delta):
 	enemy_movement(_delta)

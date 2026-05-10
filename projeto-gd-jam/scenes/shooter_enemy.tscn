@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://lrmexu8qomqu" path="res://scripts/Enemies/shooter_enemy.gd" id="1_id4l2"]
 [ext_resource type="Texture2D" uid="uid://mm1tl1uec3qf" path="res://assets/shooter.png" id="2_ve5yo"]
-[ext_resource type="Script" uid="uid://cn7g5ve7u2ekf" path="res://scripts/resources/health.gd" id="3_ena3m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ve5yo"]
 radius = 21.0
@@ -49,6 +48,16 @@ texture = ExtResource("2_ve5yo")
 
 [node name="DamageTimer" type="Timer" parent="." unique_id=944599320]
 wait_time = 0.2
+
+[node name="HP" type="ProgressBar" parent="." unique_id=383382646]
+modulate = Color(1, 0, 0, 1)
+offset_left = -13.0
+offset_top = 26.0
+offset_right = 13.0
+offset_bottom = 30.0
+step = 1.0
+value = 100.0
+show_percentage = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="ShootingArea" to="." method="_on_shooting_area_body_entered"]

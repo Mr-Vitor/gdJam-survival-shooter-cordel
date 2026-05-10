@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://40gmrwqfpkok"]
 
 [ext_resource type="Script" uid="uid://q3emwxkttv2i" path="res://scripts/exp_point.gd" id="1_ckwi1"]
+[ext_resource type="Texture2D" uid="uid://71hym1gk1kkn" path="res://assets/exp_sprite.png" id="2_pd7in"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pd7in"]
 radius = 28.01785
@@ -31,6 +32,11 @@ debug_color = Color(0.7254902, 0.60784316, 0.078431375, 1)
 visible = false
 shape = SubResource("CircleShape2D_ckwi1")
 disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=424016820]
+position = Vector2(1, 1)
+scale = Vector2(0.074999996, 0.075)
+texture = ExtResource("2_pd7in")
 
 [connection signal="body_entered" from="AttractRange" to="." method="_on_attract_range_body_entered"]
 [connection signal="body_entered" from="PickupRange" to="." method="_on_pickup_range_body_entered"]

@@ -6,8 +6,8 @@ signal damage_to_player(damage: int)
 
 func _ready() -> void:
 	super()
-	health.max_hp = 8
-	health.hp = 8
+	max_health = 8
+	health = 8
 	dmg = 5
 	speed = 75 
 	anim.play("Chase")

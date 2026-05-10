@@ -6,8 +6,8 @@ signal damage_to_player(damage: int)
 
 func _ready() -> void:
 	super()
-	health.max_hp = 40
-	health.hp = 40
+	max_health = 40
+	health = 40
 	dmg = 12
 	speed = 40
 

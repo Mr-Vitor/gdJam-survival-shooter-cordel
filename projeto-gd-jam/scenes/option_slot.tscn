@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dry0teu7et7k7"]
+
+[ext_resource type="Texture2D" uid="uid://cn46s7eu88bej" path="res://assets/dmgup_sprite.png" id="1_je35h"]
+[ext_resource type="Script" uid="uid://rhcc4up3h60r" path="res://scripts/option_slot.gd" id="2_bux6k"]
+[ext_resource type="Texture2D" uid="uid://cv3p8cf5o1acj" path="res://resources/images.png" id="3_11gh2"]
+
+[node name="OptionSlot" type="TextureButton" unique_id=1730381382]
+custom_minimum_size = Vector2(315, 40)
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_je35h")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_bux6k")
+
+[node name="Label" type="Label" parent="." unique_id=1886138534]
+layout_mode = 0
+offset_left = 43.0
+offset_top = -1.0
+offset_right = 130.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(1.3319999, 1.3319999, 1.3319999, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Nome item"
+
+[node name="Description" type="Label" parent="." unique_id=555667118]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 21.0
+offset_right = 256.0
+offset_bottom = 44.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "asdfjvhadjfvçjd"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=2039064715]
+show_behind_parent = true
+custom_minimum_size = Vector2(315, 40)
+layout_mode = 0
+offset_right = 315.0
+offset_bottom = 40.0
+texture = ExtResource("3_11gh2")
+region_rect = Rect2(10.100037, 10.900009, 207.19998, 200.8)
