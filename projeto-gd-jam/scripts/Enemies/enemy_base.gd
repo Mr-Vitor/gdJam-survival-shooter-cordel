@@ -11,24 +11,17 @@ var max_health : int: set = _set_max_health
 var speed : int
 var dmg : int
 var direction : Vector2
-var knockback: Vector2
-var player_inside:= false
+var p_detected := false
 
-func _set_max_health(value: int):
-	max_health = value
-	$HP.max_value = value
-
-func _set_health(value: int):
-	health = value
-	$HP.value = value
-	$HP.visible = value < max_health
-
-func _ready():
-	add_to_group("enemies")
-
-func enemy_movement(delta):
-	
-	if health > 0:
+func enemy_movement():
+	if self.health > 0:
+		direction = (player.position - position)
+		direction = direction.normalized()
+		velocity = direction * self.speed
+		move_and_slide()
+		
+		#if velocity.x != 0:
+			#$AnimatedSprite2D.flip_h = velocity.x < 0
 		direction = (player.position - position).normalized()
 		velocity = direction * speed
 		knockback = knockback.move_toward(Vector2.ZERO, 1)
@@ -38,7 +31,7 @@ func enemy_movement(delta):
 		if collider:
 			collider.get_collider().knockback = (collider.get_collider().global_position - 
 			global_position).normalized() * 30
-	
+      
 	else:
 		die()
 

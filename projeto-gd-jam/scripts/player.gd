@@ -6,6 +6,8 @@ const SPEED = 110.0
 @onready var health: Health = $Health
 @onready var xp = $Level_System 
 @onready var attack_area = $MeleeAttackArea
+@onready var hit_sound = $HitSound
+@onready var player_hited_sound = $PlayerHitedSound
 @onready var attack_sprite: Sprite2D = $MeleeAttackArea/CollisionShape2D/Sprite2D
 
 var isAttacking = false
@@ -26,25 +28,20 @@ func _ready():
 
 func _on_damaged(amount: int):
 	print("Tomou dano:", amount)
+
+	if !player_hited_sound.playing:
+		player_hited_sound.play()
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	
+func _on_died(from: Node):
 	anim.modulate = Color.RED
 	await get_tree().create_timer(0.5).timeout
 	anim.modulate = Color.WHITE
 
-func _on_died():
-	print("Player morreu")
-
 	queue_free()
 	get_tree().reload_current_scene()
-
-func _on_healed(amount: int):
-	print("Curou:", amount)
-	
-func _on_level_up(_level):
-	pass
-
-func _process(_delta):
-	if Input.is_action_just_pressed("debug_heal"):
-		health.heal(1)
 
 func _physics_process(_delta):
 	var direction = Vector2(
@@ -87,6 +84,8 @@ func attack():
 		for body in bodies:
 			if body.is_in_group("enemies"):
 				body.take_damage(15)
+        if !hit_sound.playing:
+				  hit_sound.play()
 		await get_tree().create_timer(0.25).timeout
 		isAttacking = false
 		attack_sprite.visible = false
