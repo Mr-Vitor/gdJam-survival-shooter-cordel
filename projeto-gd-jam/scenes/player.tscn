@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://ba54vgavh75ph"]
 
 [ext_resource type="Script" uid="uid://bcr7rc20m7rky" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="AudioStream" uid="uid://bxa411u3eppai" path="res://resources/player_hited.mp3" id="2_fjrip"]
 [ext_resource type="Texture2D" uid="uid://mmtvq02mmx52" path="res://resources/player_moving.png" id="2_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://cdh2yyq6wkd7k" path="res://resources/sword_hit.mp3" id="2_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://blvm8j5lbvq1l" path="res://resources/player_stop.png" id="3_dqkch"]
 [ext_resource type="Script" uid="uid://cn7g5ve7u2ekf" path="res://scripts/resources/health.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dmg2b6g3m3xsg" path="res://scripts/resources/level_system.gd" id="5_qlg0r"]
@@ -50,6 +52,12 @@ size = Vector2(147, 211.5)
 [node name="Player" type="CharacterBody2D" unique_id=706497792]
 z_index = 1
 script = ExtResource("1_3vyb7")
+
+[node name="PlayerHitedSound" type="AudioStreamPlayer2D" parent="." unique_id=529948015]
+stream = ExtResource("2_fjrip")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=826227176]
+stream = ExtResource("2_tuyoq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=222219855]
 position = Vector2(-1, -10.5)

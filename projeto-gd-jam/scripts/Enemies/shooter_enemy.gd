@@ -2,6 +2,8 @@ extends EnemyBase
 
 signal damage_to_player(damage: int)
 
+@onready var shooting_sound = $shootingSound
+
 @export var shooting_cooldown : Timer
 
 var bullet_scene := preload("res://scenes/bullet.tscn")
@@ -25,6 +27,8 @@ func bullet_shooting(s_ready: bool, last: bool):
 		bullet.position = position
 		bullet.deal_damage.connect(bullet_damage)
 		get_parent().add_child(bullet)
+		if !shooting_sound.playing:
+			shooting_sound.play()
 		
 		if last:
 			last_shot = false

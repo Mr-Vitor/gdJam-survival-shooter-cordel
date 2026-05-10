@@ -6,6 +6,8 @@ const SPEED = 600.0
 @onready var health: Health = $Health
 @onready var xp = $Level_System 
 @onready var attack_area = $MeleeAttackArea
+@onready var hit_sound = $HitSound
+@onready var player_hited_sound = $PlayerHitedSound
 
 var isAttacking = false
 var facing_direction = Vector2.DOWN
@@ -24,10 +26,18 @@ func _ready():
 
 func _on_damaged(amount: int, from: Node):
 	print("Tomou dano:", amount)
-	anim.modulate = Color.RED
-	await get_tree().create_timer(0.1).timeout
-	anim.modulate = Color.WHITE
 
+	if !player_hited_sound.playing:
+		player_hited_sound.play()
+	
+	if from != null:
+		knockback = (
+			global_position - from.global_position
+		).normalized() * 700
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	
 func _on_died(from: Node):
 	print("Player morreu")
 
@@ -86,7 +96,16 @@ func _physics_process(_delta):
 func attack():
 	isAttacking = true
 	update_attack_position()
+<<<<<<< Updated upstream
 	attack_area.monitoring = true
+=======
+	var bodies = attack_area.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("enemies"):
+			body.take_damage(5, self)
+			if !hit_sound.playing:
+				hit_sound.play()
+>>>>>>> Stashed changes
 	await get_tree().create_timer(0.15).timeout
 	attack_area.monitoring = false
 	isAttacking = false
