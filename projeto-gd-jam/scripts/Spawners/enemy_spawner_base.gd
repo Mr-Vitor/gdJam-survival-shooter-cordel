@@ -40,6 +40,7 @@ func enemy_manager():
 		var enemy = enemy_scene.instantiate()
 		enemy.position = enemy_spawn_point
 		enemy.damage_to_player.connect(_on_enemy_damage_to_player)
+		enemy.enemy_death.connect(_update_enemy_total)
 		route.add_child(enemy)
 		enemy_counter += 1
 		enemy.add_to_group("Enemies")
@@ -52,3 +53,6 @@ func enemy_spawn_scale(time_left: int, tick: bool):
 # Enemy signaling damage to the player
 func _on_enemy_damage_to_player(damage: int):
 	hit_p.emit(damage)
+
+func _update_enemy_total():
+	enemy_counter -= 1

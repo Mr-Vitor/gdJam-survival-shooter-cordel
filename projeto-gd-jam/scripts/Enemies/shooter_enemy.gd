@@ -12,8 +12,8 @@ var last_shot := false
 
 func _ready():
 	super()
-	health.max_hp = 18
-	health.hp = 18
+	max_health = 18
+	health = 18
 	dmg = 7
 	speed = 40
 

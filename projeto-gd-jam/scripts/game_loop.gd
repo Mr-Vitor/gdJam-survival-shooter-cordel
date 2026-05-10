@@ -1,9 +1,9 @@
 extends Node2D
 
-@onready var melee_spawner: = $Player/Camera2D/MeleeSpawner
-@onready var shooter_spawner: = $Player/Camera2D/ShooterSpawner
-@onready var tank_spawner: = $Player/Camera2D/TankSpawner
-@onready var speedster_spawner: = $Player/Camera2D/SpeedsterSpawner
+@onready var melee_spawner: = $Player/MeleeSpawner
+@onready var shooter_spawner: = $Player/ShooterSpawner
+@onready var tank_spawner: = $Player/TankSpawner
+@onready var speedster_spawner: = $Player/SpeedsterSpawner
 @onready var player := $Player
 
 # Damage signals
