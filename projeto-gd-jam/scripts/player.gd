@@ -19,9 +19,6 @@ func _ready():
 	
 	health.damaged.connect(_on_damaged)
 	health.died.connect(_on_died)
-	health.healed.connect(_on_healed)
-	
-	xp.level_up.connect(_on_level_up)
 
 	attack_area.monitoring = true
 	attack_area.monitorable = true
@@ -35,7 +32,7 @@ func _on_damaged(amount: int):
 	await get_tree().create_timer(0.1).timeout
 	
 	
-func _on_died(from: Node):
+func _on_died():
 	anim.modulate = Color.RED
 	await get_tree().create_timer(0.5).timeout
 	anim.modulate = Color.WHITE
@@ -84,8 +81,8 @@ func attack():
 		for body in bodies:
 			if body.is_in_group("enemies"):
 				body.take_damage(15)
-        if !hit_sound.playing:
-				  hit_sound.play()
+				if !hit_sound.playing:
+					hit_sound.play()
 		await get_tree().create_timer(0.25).timeout
 		isAttacking = false
 		attack_sprite.visible = false

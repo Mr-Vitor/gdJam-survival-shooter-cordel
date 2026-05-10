@@ -11,9 +11,22 @@ var max_health : int: set = _set_max_health
 var speed : int
 var dmg : int
 var direction : Vector2
-var p_detected := false
+var player_inside := false
+var knockback: Vector2
 
-func enemy_movement():
+func _set_max_health(value: int):
+	max_health = value
+	$HP.max_value = value
+
+func _set_health(value: int):
+	health = value
+	$HP.value = value
+	$HP.visible = value < max_health
+
+func _ready():
+	add_to_group("enemies")
+
+func enemy_movement(delta):
 	if self.health > 0:
 		direction = (player.position - position)
 		direction = direction.normalized()
@@ -31,7 +44,7 @@ func enemy_movement():
 		if collider:
 			collider.get_collider().knockback = (collider.get_collider().global_position - 
 			global_position).normalized() * 30
-      
+	  
 	else:
 		die()
 
