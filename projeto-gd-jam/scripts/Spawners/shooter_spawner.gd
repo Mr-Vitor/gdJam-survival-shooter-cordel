@@ -7,7 +7,7 @@ func _ready():
 			spawn_points.append(i)
 	
 	max_enemies_on_screen = 10
-	intervals = 38
+	intervals = 8
 
 # Spawns enemy upon timer reaching 0
 func _on_timer_timeout():

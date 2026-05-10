@@ -22,17 +22,8 @@ func _ready():
 		health.damaged.connect(_update_life)
 		health.healed.connect(_update_life)
 		health.died.connect(_update_life)
-		
-	
-	# XP 
-	xp_system = player.get_node_or_null("Level_System")
-	
-	if xp_system != null:
-		xp_system.xp_gained.connect(_update_xp)
-		xp_system.level_up.connect(_update_xp)
 
 	_update_life()
-	_update_xp()
 
 # -----
 # VIDA

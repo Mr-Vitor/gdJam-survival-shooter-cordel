@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://ba54vgavh75ph"]
+
+[ext_resource type="Script" uid="uid://bcr7rc20m7rky" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://c02ncutx8qf3v" path="res://assets/player sprite.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://cf0mhyl0qlltx" path="res://assets/player_idle.png" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://cn7g5ve7u2ekf" path="res://scripts/resources/health.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dmg2b6g3m3xsg" path="res://scripts/resources/level_system.gd" id="5_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://ish16o6ah81l" path="res://assets/slash_sprite.png" id="6_tuyoq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
+radius = 12.0
+height = 48.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(0, 37, 200, 363)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(200, 37, 200, 363)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("3_qlg0r")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smehm"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}],
+"loop": true,
+"name": &"stop",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuyoq"]
+size = Vector2(141, 50)
+
+[node name="Player" type="CharacterBody2D" unique_id=706497792 groups=["player"]]
+z_index = 1
+collision_mask = 3
+script = ExtResource("1_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=222219855]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_qlg0r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1395573742]
+position = Vector2(0, -2)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_smehm")
+animation = &"moving"
+
+[node name="Health" type="Node" parent="." unique_id=522763068]
+script = ExtResource("4_dqkch")
+metadata/_custom_type_script = "uid://cn7g5ve7u2ekf"
+
+[node name="Level_System" type="Node" parent="." unique_id=787713857]
+script = ExtResource("5_qlg0r")
+metadata/_custom_type_script = "uid://dmg2b6g3m3xsg"
+
+[node name="MeleeAttackArea" type="Area2D" parent="." unique_id=1829888904]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea" unique_id=1372607369]
+position = Vector2(92, -4)
+shape = SubResource("RectangleShape2D_tuyoq")
+
+[node name="Sprite2D" type="Sprite2D" parent="MeleeAttackArea/CollisionShape2D" unique_id=1385245309]
+visible = false
+position = Vector2(-1.5, 0)
+scale = Vector2(0.4103255, 0.2265625)
+texture = ExtResource("6_tuyoq")
+
+[node name="Attack_cooldown" type="Timer" parent="." unique_id=429361116]
+wait_time = 1.5
+autostart = true
+
+[node name="XP" type="ProgressBar" parent="." unique_id=921780632]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 0.99607843)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.0
+offset_right = 111.0
+offset_bottom = 6.0
+grow_horizontal = 2
+max_value = 10.0
+show_percentage = false
+
+[node name="Level" type="Label" parent="XP" unique_id=1002983654]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 156.0
+offset_top = 8.0
+offset_right = 221.0
+offset_bottom = 31.0
+text = "Lvl 1"
+horizontal_alignment = 2
+
+[connection signal="body_entered" from="MeleeAttackArea" to="." method="_on_melee_attack_area_body_entered"]
+[connection signal="timeout" from="Attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

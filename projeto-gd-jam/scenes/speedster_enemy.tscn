@@ -1,11 +1,40 @@
 [gd_scene format=3 uid="uid://dxuh07vcasdyi"]
 
 [ext_resource type="Script" uid="uid://dgfjc4cxqd45j" path="res://scripts/Enemies/speedster_enemy.gd" id="1_p1clj"]
+[ext_resource type="Texture2D" uid="uid://d6nygepm1xbt" path="res://assets/speedster_spritesheet.png" id="2_3eu3i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3eu3i"]
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nvqth"]
-radius = 11.0
+radius = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3eu3i"]
+atlas = ExtResource("2_3eu3i")
+region = Rect2(0, 41, 185, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvqth"]
+atlas = ExtResource("2_3eu3i")
+region = Rect2(209, 41, 185, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b7xwh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eu3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvqth")
+}],
+"loop": true,
+"name": &"Chase",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="SpeedsterEnemy" type="CharacterBody2D" unique_id=1498668978]
 collision_layer = 2
@@ -21,7 +50,25 @@ debug_color = Color(0.9019608, 0, 0.14117648, 0.9137255)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1218441706]
-visible = false
 shape = SubResource("CircleShape2D_nvqth")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1680162033]
+position = Vector2(1.1920929e-07, -7.1054274e-15)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_b7xwh")
+animation = &"Chase"
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=1693449186]
+wait_time = 0.2
+
+[node name="HP" type="ProgressBar" parent="." unique_id=181454383]
+modulate = Color(1, 0, 0, 1)
+offset_left = -13.0
+offset_top = 20.0
+offset_right = 13.0
+offset_bottom = 24.0
+step = 1.0
+value = 100.0
+show_percentage = false
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

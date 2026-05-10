@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://clfddudkea171"]
 
 [ext_resource type="Script" uid="uid://de60pgy7lvlsl" path="res://scripts/resources/hud.gd" id="1_y7dsf"]
+[ext_resource type="Script" uid="uid://r4jgosmv6j4y" path="res://scenes/components/timer.gd" id="2_bew8r"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1799156450]
 script = ExtResource("1_y7dsf")
@@ -10,6 +11,7 @@ offset_left = 5.0
 offset_top = 1.0
 offset_right = 45.0
 offset_bottom = 24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -18,5 +20,26 @@ offset_left = 6.0
 offset_top = 19.0
 offset_right = 46.0
 offset_bottom = 42.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Label" parent="." unique_id=1326309930]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_top = 35.0
+offset_right = 21.0
+offset_bottom = 58.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "00:00"
+script = ExtResource("2_bew8r")
+
+[node name="1s" type="Timer" parent="Timer" unique_id=297149231]
+autostart = true
+
+[connection signal="timeout" from="Timer/1s" to="Timer" method="_on_s_timeout"]

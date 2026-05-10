@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 600.0
+const SPEED = 110.0
 
 @onready var anim = $AnimatedSprite2D
 @onready var health: Health = $Health
@@ -8,9 +8,11 @@ const SPEED = 600.0
 @onready var attack_area = $MeleeAttackArea
 @onready var hit_sound = $HitSound
 @onready var player_hited_sound = $PlayerHitedSound
+@onready var attack_sprite: Sprite2D = $MeleeAttackArea/CollisionShape2D/Sprite2D
 
 var isAttacking = false
 var facing_direction = Vector2.DOWN
+var knockback : Vector2
 
 func _ready():
 	add_to_group("player")
@@ -19,51 +21,27 @@ func _ready():
 	health.died.connect(_on_died)
 	health.healed.connect(_on_healed)
 	
-	xp.xp_gained.connect(_on_xp_gained)
 	xp.level_up.connect(_on_level_up)
 
-	attack_area.monitoring = false
+	attack_area.monitoring = true
+	attack_area.monitorable = true
 
-func _on_damaged(amount: int, from: Node):
+func _on_damaged(amount: int):
 	print("Tomou dano:", amount)
 
 	if !player_hited_sound.playing:
 		player_hited_sound.play()
 	
-	if from != null:
-		knockback = (
-			global_position - from.global_position
-		).normalized() * 700
-	
 	await get_tree().create_timer(0.1).timeout
 	
 	
 func _on_died(from: Node):
-	print("Player morreu")
+	anim.modulate = Color.RED
+	await get_tree().create_timer(0.5).timeout
+	anim.modulate = Color.WHITE
 
 	queue_free()
 	get_tree().reload_current_scene()
-
-func _on_healed(amount: int):
-	print("Curou:", amount)
-
-func _on_xp_gained(amount: int):
-	print("Ganhou XP: ", amount)
-	
-func _on_level_up(level:int):
-	print("Subiu de Nível!!! \nNivel atual: ", level) 
-
-func _process(delta):
-
-	# Funções de debug
-	if Input.is_action_just_pressed("debug_damage"):
-		health.apply_damage(1)
-
-	if Input.is_action_just_pressed("debug_heal"):
-		health.heal(1)
-		
-	if Input.is_action_just_pressed("debug_xp"):
-		xp.add_xp(5)
 
 func _physics_process(_delta):
 	var direction = Vector2(
@@ -77,6 +55,8 @@ func _physics_process(_delta):
 		facing_direction = direction
 
 	velocity = direction * SPEED
+	knockback = knockback.move_toward(Vector2.ZERO, 20)
+	velocity += knockback
 	move_and_slide()
 
 	# ANIMAÇÃO
@@ -86,30 +66,36 @@ func _physics_process(_delta):
 		anim.play("moving")
 
 	# VIRAR SPRITE
-	if direction.x != 0:
+	if direction.x > 0:
 		anim.flip_h = direction.x < 0
-		
-	# Input de ataque
-	if Input.is_action_just_pressed("attack") and !isAttacking:
-		attack()
+		if !isAttacking:
+			update_attack_position(Vector2.RIGHT)
+			attack_sprite.flip_h = false
+	elif direction.x < 0:
+		anim.flip_h = direction.x < 0
+		if !isAttacking:
+			update_attack_position(Vector2.LEFT)
+			attack_sprite.flip_h = true
 		
 func attack():
-	isAttacking = true
-	update_attack_position()
-<<<<<<< Updated upstream
-	attack_area.monitoring = true
-=======
-	var bodies = attack_area.get_overlapping_bodies()
-	for body in bodies:
-		if body.is_in_group("enemies"):
-			body.take_damage(5, self)
-			if !hit_sound.playing:
-				hit_sound.play()
->>>>>>> Stashed changes
-	await get_tree().create_timer(0.15).timeout
-	attack_area.monitoring = false
-	isAttacking = false
+	if isAttacking:
+		attack_sprite.visible = true
+		var bodies = attack_area.get_overlapping_bodies()
+		for body in bodies:
+			if body.is_in_group("enemies"):
+				body.take_damage(15)
+        if !hit_sound.playing:
+				  hit_sound.play()
+		await get_tree().create_timer(0.25).timeout
+		isAttacking = false
+		attack_sprite.visible = false
 
-func update_attack_position():
-	var distance = 200
-	attack_area.position = facing_direction * distance
+func update_attack_position(direction):
+	var distance = 1
+	if direction == Vector2.LEFT:
+		distance = 190
+	attack_area.position = direction * distance
+
+func _on_attack_cooldown_timeout() -> void:
+	isAttacking = true
+	attack()

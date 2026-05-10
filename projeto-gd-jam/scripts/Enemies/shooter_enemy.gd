@@ -5,18 +5,24 @@ signal damage_to_player(damage: int)
 @onready var shooting_sound = $shootingSound
 
 @export var shooting_cooldown : Timer
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var damage_timer:= $DamageTimer
 
 var bullet_scene := preload("res://scenes/bullet.tscn")
 var is_ready := false
 var last_shot := false
 
 func _ready():
+	super()
+	max_health = 18
 	health = 18
 	dmg = 7
 	speed = 40
 
 func _physics_process(_delta):
-	enemy_movement()
+	enemy_movement(_delta)
+	if velocity.x != 0:
+		sprite_2d.flip_h = velocity.x < 10
 
 # Create and shoot bullet
 # On contact with player, emits signal to deal damage
@@ -37,9 +43,18 @@ func bullet_shooting(s_ready: bool, last: bool):
 func bullet_damage():
 	damage_to_player.emit(dmg)
 
-func _on_area_2d_body_entered(_body):
-	if !(_body.is_in_group("Enemies")):
-		bullet_damage()
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player_inside = true
+		damage_timer.start()
+
+func _on_hitbox_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player_inside = false
+		damage_timer.stop()
+
+func _on_damage_timer_timeout() -> void: 
+	bullet_damage()
 
 func _on_shooting_area_body_entered(_body):
 	if !(_body.is_in_group("Enemies")):
