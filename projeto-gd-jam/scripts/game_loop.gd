@@ -46,3 +46,7 @@ func _on_timer_spawn_rate_increase(time_left: int, spawn_rate_tick: bool) -> voi
 	shooter_spawner.enemy_spawn_scale(time_left, spawn_rate_tick)
 	tank_spawner.enemy_spawn_scale(time_left, spawn_rate_tick)
 	speedster_spawner.enemy_spawn_scale(time_left, spawn_rate_tick)
+
+# End game
+func _on_timer_timeout() -> void:
+	get_tree().change_scene_to_file("res://scenes/end_game.tscn")

@@ -8,7 +8,7 @@ func _ready() -> void:
 			spawn_points.append(i)
 	
 	max_enemies_on_screen = 5
-	intervals = 36
+	intervals = 6
 
 
 func _on_timer_timeout() -> void:
